@@ -1,0 +1,24 @@
+# Makefile for dpcore_py.c
+#
+# 2014-05-30 Dan Ellis dpwe@ee.columbia.edu
+
+# Compile rules for C-extension version of dpcore
+
+# darwinports
+#PYDIR=/opt/local/Library
+# homebrew
+PYDIR=C:\Users\MSI-PC\Anaconda3\envs\RLAG
+
+CFLAGS=-I${PYDIR}/Frameworks/Python.framework/Versions/2.7/include/python2.7 -I$C:\Users\MSI-PC\Anaconda3\envs\RLAG\Lib\site-packages\numpy\core\include
+PYTHON_INCLUDE=C:\Users\MSI-PC\Anaconda3\envs\RLAG\lib\site-packages\numpy\core\include
+
+
+# ---- Link --------------------------- 
+_dpcore_py.so: dpcore_py.o
+	gcc -bundle -flat_namespace -undefined suppress -o _dpcore_py.so dpcore_py.o
+
+# ---- gcc C compile ------------------
+dpcore_py.o: dpcore_py.c
+	gcc ${CFLAGS} -O3 -c dpcore_py.c
+
+
